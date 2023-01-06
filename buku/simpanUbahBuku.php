@@ -1,0 +1,17 @@
+<?php
+session_start();
+if ($_SESSION['username'] == '') {
+    header("location:../login.php");
+}
+include "../config/koneksi.php";
+$kdBuku = $_POST['kd_buku'];
+$judulBuku = $_POST['judul_buku'];
+$idPenerbit = $_POST['id_penerbit'];
+$thnTerbit = $_POST['thn_terbit'];
+
+$sql = mysqli_query($koneksi, "UPDATE buku SET judul_buku='$judulBuku',id_penerbit='$idPenerbit',thn_terbit='$thnTerbit' where kd_buku='$kdBuku'");
+if ($sql) {
+    header("location: ../buku/index.php");
+} else {
+    die;
+}
